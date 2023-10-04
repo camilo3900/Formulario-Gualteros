@@ -1,1 +1,71 @@
-<p>formulario-alumnos works!</p>
+<div class="form-title">
+    <h1>Formulario de Inscripción</h1>
+</div>
+
+<form class="comentarios" [formGroup] = "formAlumnos">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input class="form-control" [ngClass]="{'is-invalid': nombreControlInvalid}" formControlName="nombre"
+            type="text" id="nombre" #nombreInput />
+        <div class="invalid-feedback" *ngIf="nombreControl.errors?.['required']">
+            Campo requerido.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input class="form-control" [ngClass]="{'is-invalid': apellidoControlInvalid}" formControlName="apellido"
+            type="text" id="apellido" />
+        <div class="invalid-feedback" *ngIf="apellidoControl.errors?.['required']">
+            Campo requerido.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="correo" class="form-label ">Correo</label>
+        <input class="form-control " [ngClass]="{'is-invalid': emailControlIsInvalid}" formControlName="correo"
+            type="email" id="correo" />
+        <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">Campo requerido.</div>
+        <div class="invalid-feedback" *ngIf="emailControl.errors?.['email']">
+            Ingresar un email valido.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="miSelector">Selecciona un Curso: </label>
+        <br>
+        <select id="miSelector" name="elemento" formControlName="curso">
+            <option value="Matematicas">Matematicas</option>
+            <option value="Artes">Artes</option>
+            <option value="Historia">Historia</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3 text-end">
+        <button (click)="onClickForm()" type="submit" class="btn-outline-warning btn">Registrar</button>
+    </div>
+</form>
+<div class="btn-mostrar">
+    <button class="btn-outline-warning btn" (click)="onClickMostrar()">Mostrar Alumnos</button>
+</div>
+
+
+<div class="container text-center" *ngIf="btnMostrar==true">
+    <div class="row row-height">
+        <div class="col-4 tarjeta" *ngFor="let alumno of listaAlumnos">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title nombre-card">{{alumno.nombre}}</h5>
+                <div class="card-body">
+                    <img src="../../assets/moneda_icon.png" class="card-img-top img-properties" alt="...">
+                    <p class="card-text"><strong>Correo: </strong>{{alumno.correo}}</p>
+                    <p class="card-text"><strong>Curso: </strong>{{alumno.curso}}</p>
+                    <a href="#" class="btn btn-primary">Añadir curso</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+  
+    
+
+
+  
